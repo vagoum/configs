@@ -8,8 +8,13 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/NERDTree'
+Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 Plugin 'Townk/vim-autoclose'
+Plugin 'rgrinberg/vim-ocaml'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()
 filetype plugin indent on
@@ -34,12 +39,14 @@ set nobackup
 set nowb
 set noswapfile
 
+
 "Tabs and indent
+set tabstop=8    
+set shiftwidth=4     
+set softtabstop=4
 set expandtab
+set shiftround
 set smarttab
-set shiftwidth=8     
-set tabstop=8     
-set softtabstop=8
 set autoindent
 set smartindent
 set wrap
@@ -65,14 +72,33 @@ let mapleader=","
 
 "Colorschemes
 syntax enable
-let g:solarized_termtrans = 1
-set background=dark
+"let g:solarized_termtrans = 1 " terminal background settings
 let g:solarized_termcolors=256
 colorscheme solarized
+
+if has('gui_running')
+        set background=dark
+    else
+        set background=dark
+endif
 
 
 map j gj
 map k gk
+
+"Syntastic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+map <silent> <Leader>e :Errors<CR>
+
 
 
 " Yank text to the OS X clipboard
