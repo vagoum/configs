@@ -8,13 +8,13 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/NERDTree'
-Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 Plugin 'Townk/vim-autoclose'
 Plugin 'rgrinberg/vim-ocaml'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'majutsushi/tagbar'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 filetype plugin indent on
@@ -42,9 +42,9 @@ set noswapfile
 
 "Tabs and indent
 set tabstop=8    
-set shiftwidth=4     
-set softtabstop=4
-set expandtab
+set shiftwidth=8     
+set softtabstop=8
+set noexpandtab
 set shiftround
 set smarttab
 set autoindent
@@ -68,11 +68,13 @@ set virtualedit=all
 set foldmethod=indent
 set foldlevel=99
 
+set fileformat=unix
+
 let mapleader=","
 
 "Colorschemes
 syntax enable
-"let g:solarized_termtrans = 1 " terminal background settings
+
 let g:solarized_termcolors=256
 colorscheme solarized
 
@@ -82,6 +84,7 @@ if has('gui_running')
         set background=dark
 endif
 
+"useful random
 
 map j gj
 map k gk
