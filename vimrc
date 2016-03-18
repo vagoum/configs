@@ -5,22 +5,35 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/NERDTree'
-Plugin 'ervandew/supertab'
-Plugin 'Townk/vim-autoclose'
-Plugin 'rgrinberg/vim-ocaml'
-Plugin 'xolox/vim-easytags'
-Plugin 'xolox/vim-misc'
-Plugin 'majutsushi/tagbar'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
 
 call vundle#end()
+
+"syntax stuff"
 filetype plugin indent on
 syntax on
+syntax enable
+highlight Comment ctermfg=blue
 
+"indentation
+set smartindent
+set autoindent
+set smarttab
+
+"tabs
+set tabstop=4    
+set shiftwidth=4     
+set softtabstop=4
+set noexpandtab
+set shiftround
+"tab completion
+set wildmenu
+set wildmode=list:longest,full
+
+
+"line folding after 79 characters
+set tw=79
+set formatoptions+=t
 
 
 "Searching
@@ -41,18 +54,7 @@ set nowb
 set noswapfile
 
 
-"Tabs and indent
-set tabstop=8    
-set shiftwidth=8     
-set softtabstop=8
-set noexpandtab
-set shiftround
-set smarttab
-set autoindent
-set smartindent
-set wrap
-
-"General sets
+"General settings
 set showmatch
 set magic "regexp support
 set ruler
@@ -68,20 +70,20 @@ set splitright
 set virtualedit=all
 set foldmethod=indent
 set foldlevel=99
-
 set fileformat=unix
+
+
 
 let mapleader=","
 
-"Colorschemes
-syntax enable
 
-"Solarized
-"let g:solarized_termcolors=256
-"colorscheme solarized
+
+"Colorschemes
 
 "Gruvbox
 colorscheme gruvbox
+
+
 
 if has('gui_running')
         set background=dark
@@ -89,16 +91,12 @@ if has('gui_running')
         set background=dark
 endif
 
-"useful random
+"useful mappings
 
 map j gj
 map k gk
 
-
-
 map <silent> <Leader>e :Errors<CR>
-
-
 
 " Yank text to the OS X clipboard
 noremap <leader>y "*y
@@ -107,16 +105,25 @@ noremap <leader>yy "*Y
 "Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>"
 
-
 nnoremap ; :
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+
+
+set statusline=
+	\%F%m%r%h%w\ [format=%{&ff}]\ [type=%{&ft}]\ [%l,%v][%p%%]\ 
+	\%{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+
+nmap <leader>s :exec "set laststatus=" . (( &laststatus == 1) ? 2 : 1) <CR>
+
+
+
 
 
 " Return to last edit position when opening files 
