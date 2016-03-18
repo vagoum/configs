@@ -15,6 +15,7 @@ Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'majutsushi/tagbar'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 filetype plugin indent on
@@ -75,8 +76,12 @@ let mapleader=","
 "Colorschemes
 syntax enable
 
-let g:solarized_termcolors=256
-colorscheme solarized
+"Solarized
+"let g:solarized_termcolors=256
+"colorscheme solarized
+
+"Gruvbox
+colorscheme gruvbox
 
 if has('gui_running')
         set background=dark
@@ -89,16 +94,7 @@ endif
 map j gj
 map k gk
 
-"Syntastic
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 map <silent> <Leader>e :Errors<CR>
 
@@ -130,6 +126,8 @@ autocmd BufReadPost *
       \ endif
 set viminfo^=%
 
+autocmd Filetype gitcommit setlocal spell textwidth=72
+autocmd FileType ocaml source /Users/vagoum/.opam/system/share/typerex/ocp-indent/ocp-indent.vim
 
 autocmd FileType c         set makeprg=gcc\ -Wall\ -O2
 autocmd FileType cpp       set makeprg=g++\ -Wall\ -O2
