@@ -6,6 +6,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'morhetz/gruvbox'
+Plugin 'valloric/youcompleteme'
 
 call vundle#end()
 
@@ -72,11 +73,7 @@ set foldmethod=indent
 set foldlevel=99
 set fileformat=unix
 
-
-
 let mapleader=","
-
-
 
 "Colorschemes
 
@@ -135,15 +132,6 @@ else
 endif
 
 
-set statusline=
-	\%F%m%r%h%w\ [format=%{&ff}]\ [type=%{&ft}]\ [%l,%v][%p%%]\ 
-	\%{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-
-nmap <leader>s :exec "set laststatus=" . (( &laststatus == 1) ? 2 : 1) <CR>
-
-
-
-
 
 " Return to last edit position when opening files 
 autocmd BufReadPost *
@@ -153,24 +141,11 @@ autocmd BufReadPost *
 set viminfo^=%
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
-autocmd FileType ocaml source /Users/vagoum/.opam/system/share/typerex/ocp-indent/ocp-indent.vim
 
 autocmd FileType c         set makeprg=gcc\ -Wall\ -O2
 autocmd FileType cpp       set makeprg=g++\ -Wall\ -O2
 autocmd FileType python    set makeprg=python3
 
-" Save, compile and run files
-function! CompileAndRun()
-  write
-  silent! make %
-  redraw!
-  cwindow
-  if len(getqflist()) == 0
-    exec '!time ./a.out'
-  endif
-endfunction
-nnoremap <leader>c :call CompileAndRun()<cr>
-                           
 
 "function! Tab_Or_Complete()
 "      if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
