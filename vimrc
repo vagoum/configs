@@ -5,10 +5,19 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'valloric/youcompleteme'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()
+
 
 "syntax stuff"
 filetype plugin indent on
@@ -30,12 +39,6 @@ set shiftround
 "tab completion
 set wildmenu
 set wildmode=list:longest,full
-
-
-"line folding after 79 characters
-set tw=79
-set formatoptions+=t
-
 
 "Searching
 set ignorecase
@@ -77,16 +80,26 @@ let mapleader=","
 
 "Colorschemes
 
-"Gruvbox
-colorscheme gruvbox
+set background=dark
+colorscheme solarized
+
+" vim-airline settings"
+set laststatus=2
+
+" When powerline fonts are installed
+let g:airline_powerline_fons=1
+" Show PASTE if in paste mode
+let g:airline_detect_paste=1
+" Show airline for tabs too
+let g:airline#extensions#tabline#enabled=1
 
 
+"Nerdtree (tabs) settings
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+ " To have NERDTree always open on startup
+let g:nerdtree_tabs_open_on_console_startup = 0
 
-if has('gui_running')
-        set background=dark
-    else
-        set background=dark
-endif
+
 
 "useful mappings
 
@@ -106,52 +119,16 @@ nnoremap ; :
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    silent! execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      call system("tmux select-pane -" . a:tmuxdir)
-      redraw!
-    endif
-  endfunction
 
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-endif
-
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 
 " Return to last edit position when opening files 
 autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal! g`\"" |
-      \ endif
-set viminfo^=%
+	\  if line("'\"") > 0 && line("'\"") <= line("$") |
+	\     exe "normal! g`\"" |
+	\   endif
 
-autocmd Filetype gitcommit setlocal spell textwidth=72
-
-autocmd FileType c         set makeprg=gcc\ -Wall\ -O2
-autocmd FileType cpp       set makeprg=g++\ -Wall\ -O2
-autocmd FileType python    set makeprg=python3
-
-
-"function! Tab_Or_Complete()
-"      if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-"              return "\<C-N>"
-"      else
-"            return "\<Tab>"
-"      endif
-"endfunction
-":inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
