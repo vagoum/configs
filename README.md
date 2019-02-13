@@ -1,1 +1,1 @@
-Random configuration files
+Configuration files I use in macos/unix environments

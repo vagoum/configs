@@ -1,2 +1,3 @@
-fix broken tmux
-add configs for mutt etc
+test tmux configs
+
+fine grained vim/nvim configs & plugins
