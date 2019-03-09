@@ -13,7 +13,17 @@
     tool = kdiff3
 
 [alias]
+        br = branch
+        p = push
+        c = commit
+        cl = clone
+        clr = clone --recursive 
+        l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
         lg = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+        dd = diff --check --dirstat --find-copies --find-renames --histogram --color
+        log-graph = log --graph --all  --decorate --oneline
+        logmyweek = !git log --author $(git config user.email) --since "1 week ago"
+	pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
 
 [color]
 	branch = auto
